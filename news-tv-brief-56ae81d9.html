@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>爱游戏 · 资料整理与索引笔记</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f0f7fa;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.7;
+      color: #1f2e3c;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 760px;
+      width: 100%;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 12px 30px rgba(20, 90, 100, 0.08);
+      padding: 2rem 1.5rem;
+      transition: box-shadow 0.2s;
+    }
+
+    /* 蓝绿色点缀 */
+    .accent-line {
+      display: inline-block;
+      width: 48px;
+      height: 4px;
+      background: linear-gradient(90deg, #2c9e9f, #55c2b0);
+      border-radius: 8px;
+      margin-bottom: 0.8rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(44, 158, 159, 0.12);
+      color: #1c7a7b;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      padding: 0.2rem 0.9rem;
+      border-radius: 30px;
+      margin-bottom: 1.2rem;
+      border: 1px solid #cae5e5;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #0f2d38;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .lead {
+      font-size: 1.05rem;
+      color: #2a4b55;
+      background: #edf6f7;
+      padding: 0.8rem 1.2rem;
+      border-radius: 20px;
+      margin: 1.5rem 0 2rem;
+      border-left: 6px solid #3baaa0;
+      font-weight: 400;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #1e4c4e;
+      margin: 2rem 0 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    h2::before {
+      content: "▍";
+      color: #2c9e9f;
+      font-weight: 700;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+      margin: 1.8rem 0 2.2rem;
+    }
+
+    .card {
+      background: #f7fcfd;
+      border: 1px solid #d5e9ec;
+      border-radius: 24px;
+      padding: 1.2rem 1rem;
+      transition: background 0.15s, box-shadow 0.2s;
+      box-shadow: 0 2px 6px rgba(25, 100, 100, 0.02);
+    }
+
+    .card:hover {
+      background: white;
+      box-shadow: 0 6px 16px rgba(30, 120, 120, 0.08);
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #1f5456;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #2f4b53;
+      line-height: 1.6;
+    }
+
+    .quote-block {
+      background: #e9f3f5;
+      border-radius: 24px;
+      padding: 1.3rem 1.5rem;
+      margin: 2.2rem 0;
+      position: relative;
+      font-style: normal;
+      border: 1px solid #cde1e4;
+    }
+
+    .quote-block::before {
+      content: "📌";
+      margin-right: 0.6rem;
+      font-size: 1.2rem;
+    }
+
+    .quote-block strong {
+      color: #156b6b;
+    }
+
+    .fact-list {
+      list-style: none;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .fact-list li {
+      padding: 0.6rem 0 0.6rem 2rem;
+      position: relative;
+      border-bottom: 1px dashed #dceff2;
+      color: #1f3e45;
+    }
+
+    .fact-list li::before {
+      content: "·";
+      position: absolute;
+      left: 0.8rem;
+      color: #2c9e9f;
+      font-weight: 700;
+      font-size: 1.4rem;
+      line-height: 1.2;
+    }
+
+    .inline-link {
+      color: #156e6e;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid #b3dbdb;
+      transition: border-color 0.2s, background 0.1s;
+      padding: 0 0.08rem;
+    }
+
+    .inline-link:hover {
+      border-bottom-color: #2c9e9f;
+      background: #eafff8;
+    }
+
+    .faq-mini {
+      background: #f3fafb;
+      border-radius: 28px;
+      padding: 1.5rem;
+      margin: 2.4rem 0 1.2rem;
+    }
+
+    .faq-mini summary {
+      font-weight: 500;
+      color: #1d5556;
+      cursor: pointer;
+      padding: 0.3rem 0;
+    }
+
+    .faq-mini p {
+      margin-top: 1rem;
+      color: #2d4a51;
+      padding-left: 0.5rem;
+    }
+
+    .visit-note {
+      text-align: center;
+      padding: 1.2rem 1rem 0.2rem;
+      font-size: 0.95rem;
+      color: #3f636b;
+      border-top: 1px solid #daeef0;
+      margin-top: 2.5rem;
+    }
+
+    .visit-note a {
+      color: #116a6a;
+      font-weight: 600;
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 1.5rem 1rem;
+        border-radius: 24px;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      .card-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+      .lead {
+        font-size: 0.96rem;
+        padding: 0.7rem 1rem;
+      }
+      .quote-block {
+        padding: 1rem;
+      }
+      .faq-mini {
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- 标签 + 标题 -->
+    <span class="tag">📂 信息索引 · 整理向</span>
+    <div class="accent-line"></div>
+    <h1>爱游戏 · 资料笔记</h1>
+    <p style="color: #3d6068; margin-bottom: 0.2rem;">一次围绕平台内容与信息结构的梳理</p>
+
+    <!-- 导语 -->
+    <div class="lead">
+      从资料整理的角度切入：<strong>爱游戏</strong> 并非单一站点，而是一个聚合游戏资讯、社区动态与内容索引的信息节点。以下基于公开内容做分类整理，方便快速了解其结构。
+    </div>
+
+    <!-- 网格卡片：结构特点 -->
+    <h2>索引栏目特征</h2>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">📋 游戏资讯</div>
+        <p>新作发布、版本更新、活动预告等，按时间线排列，便于回溯。</p>
+      </div>
+      <div class="card">
+        <div class="card-title">📁 专题归档</div>
+        <p>围绕热门系列或特定类型整理的文章集合，方便横向浏览。</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🔗 外链参考</div>
+        <p>部分内容附带相关站点或原文出处，形成可追溯的索引链。</p>
+      </div>
+      <div class="card">
+        <div class="card-title">📊 数据摘要</div>
+        <p>排行榜、评分、活动参与数等轻量数据，辅助判断内容热度。</p>
+      </div>
+    </div>
+
+    <!-- 正文段落：更详细的说明 -->
+    <p style="margin: 1.2rem 0 0.6rem;">
+      实际浏览中，<a href="https://news-tv-igame.com" class="inline-link">爱游戏</a> 的页面布局偏向传统门户式结构：头部导航区分出新闻、攻略、社区等板块，中部以卡片流展示近期更新，底部则提供分类入口。从信息整理的角度看，这种设计对「快速定位」有一定帮助——尤其是当你想了解某个游戏的最新动态时，按时间倒序排列的列表能减少筛选成本。
+    </p>
+    <p style="margin: 0.8rem 0 0.6rem;">
+      另外，站点内不少文章会标注来源或参考链接，这对后续深入查阅比较友好。例如一些评测类内容会附带版本号、测试平台等元信息，方便核对时效性。整体而言，它更像一个轻量的信息集散地，而非深度评论平台。
+    </p>
+
+    <!-- 引用提示 -->
+    <div class="quote-block">
+      <strong>整理提示：</strong> 由于站点内容动态更新，部分索引条目可能随时间变化。建议将 <a href="https://news-tv-igame.com" class="inline-link">爱游戏</a> 视为信息起点，再根据具体标题或标签进一步搜索原始资料，以获得更完整的上下文。
+    </div>
+
+    <!-- 要点列表 -->
+    <h2>整理过程中注意的几点</h2>
+    <ul class="fact-list">
+      <li><strong>标题与导语的一致性</strong> —— 多数文章标题能直接反映核心内容，但少数活动公告会使用品牌口号，需结合导语理解。</li>
+      <li><strong>分类标签的粒度</strong> —— 标签系统偏宽泛（如“热门”“攻略”），同一标签内可能混杂不同游戏，建议配合筛选或搜索使用。</li>
+      <li><strong>外链稳定性</strong> —— 部分引用链接指向外部站点，若遇到失效可尝试通过文章标题回查存档。</li>
+      <li><strong>移动端适配</strong> —— 页面在手机浏览器上采用单列布局，卡片触控区域较大，适合滑动浏览。</li>
+    </ul>
+
+    <!-- 迷你 FAQ 摘要（非完整FAQ，仅示意思考） -->
+    <details class="faq-mini">
+      <summary>❓ 关于索引的一些常见疑问</summary>
+      <p><strong>Q：所有内容都来自爱游戏自身吗？</strong><br>
+      不完全是。站内部分内容为转载或编译，文末通常标注了原始出处。以原文为准更可靠。</p>
+      <p><strong>Q：如何快速找到某款游戏的专题？</strong><br>
+      可利用站内搜索（如果有）或按导航栏的“游戏库”分类逐层查找。由于标签较宽，直接搜索游戏名通常更直接。</p>
+      <p><strong>Q：信息更新频率如何？</strong><br>
+      观察下来，热门游戏相关资讯更新较频繁（每日数条），冷门游戏可能数周一条。建议搭配 RSS 或定期浏览。</p>
+    </details>
+
+    <!-- 访问提示句（自然嵌入链接） -->
+    <div class="visit-note">
+      <span>若想进一步查阅原始内容，可以直接前往 <a href="https://news-tv-igame.com" class="inline-link">爱游戏</a> 浏览最新条目。本页仅作为结构化提要，具体细节以站点实际页面为准。</span>
+    </div>
+
+    <!-- 底部装饰 -->
+    <div style="margin-top: 2rem; text-align: center; font-size: 0.75rem; color: #96b6bb; letter-spacing: 0.02em;">
+      <span>资料整理 · 索引笔记 · 版本 2025</span>
+    </div>
+
+  </div>
+</body>
+</html>
